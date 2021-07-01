@@ -28,7 +28,8 @@ test:
     - llist
   commands:
     - pip check
-    - python tests/llist_test.py
+    # Running this test on PyPy raises AttributeError: module 'gc' has no attribute 'set_debug'
+    - python tests/llist_test.py  # [python_impl != "pypy"]
   requires:
     - pip
   source_files:
