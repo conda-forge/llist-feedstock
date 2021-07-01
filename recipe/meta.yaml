@@ -12,6 +12,7 @@ source:
 
 build:
   number: 0
+  skip: True  # [python_impl == "pypy"]
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
@@ -28,7 +29,8 @@ test:
     - llist
   commands:
     - pip check
-    - python tests/llist_test.py
+    # Running this test on PyPy raises AttributeError: module 'gc' has no attribute 'set_debug'
+    - python tests/llist_test.py  # [python_impl != "pypy"]
   requires:
     - pip
   source_files:
